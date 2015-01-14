@@ -1,4 +1,4 @@
-package com.sungung.controller;
+package com.sungung.adapter;
 
 /**
  * @author PARK Sungung
