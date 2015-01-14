@@ -16,6 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * All groovy class should be extended from this abstract class.
+ * Abstract class will provide all infrastructure to build the report for the groovy script.
+ * Infrastructure is Spring bean which shall be injected from caller which is mostly Spring Controller bean.
  * @author PARK Sungung
  * @Since 0.0.1
  */

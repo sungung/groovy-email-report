@@ -15,7 +15,10 @@ public class ReportSupportService {
     @Async
     public void executeGroovy(GroovyAdapter groovyAdapter, Map<String, String> queryParams) throws InterruptedException{
         groovyAdapter.execute(queryParams);
-        groovyAdapter.fetchEmailReport(queryParams.get(GroovyAdapter.PARAM_REPORT_TITLE), queryParams);
+        groovyAdapter.fetchEmailReport(
+                queryParams.get(GroovyAdapter.PARAM_REPORT_TITLE)==null ? groovyAdapter.getClass().getName() : queryParams.get(GroovyAdapter.PARAM_REPORT_TITLE),
+                queryParams
+        );
     }
 
 }

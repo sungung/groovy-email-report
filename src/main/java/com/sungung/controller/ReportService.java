@@ -1,9 +1,6 @@
 package com.sungung.controller;
 
-import com.sungung.adapter.GroovyAdapter;
-import com.sungung.adapter.GroovyLoadException;
-import com.sungung.adapter.GroovyNotFoundException;
-import com.sungung.adapter.GroovyReportException;
+import com.sungung.adapter.*;
 import com.sungung.env.AppConfiguration;
 import com.sungung.service.ReportSupportService;
 import groovy.lang.GroovyClassLoader;
@@ -44,7 +41,7 @@ public class ReportService {
 
     /**
      * Client will wait util process completed. Endpoint looks like below
-     * http://localhost:9000/report/BrewerReport?RECIPIENTS=user@helloworld.com
+     * curl http://localhost:9000/report/BrewerReport?RECIPIENTS=user@helloworld.com
      * @param groovy        the name groovy script
      * @param queryParams   report filters
      */
@@ -60,6 +57,21 @@ public class ReportService {
     }
 
     /**
+     * Overload default method, adding report recipient into path variable
+     * curl http://localhost:9000/report/BrewerReport/user@helloworld.com
+     * @param groovy        the name groovy script
+     * @param recipients    the email address of report recipients
+     * @param queryParams   report filters
+     */
+    @RequestMapping(value = "/report/{groovy}/{recipients}")
+    @ResponseStatus(HttpStatus.OK)
+    public void runGroovyReport(@PathVariable String groovy, @PathVariable String recipients, @RequestParam Map<String, String> queryParams) {
+        queryParams.put("RECIPIENTS",recipients);
+        runGroovyReport(groovy, queryParams);
+    }
+
+
+    /**
      * Invoke new thread then quit immediately
      * @param groovy        the name groovy script
      * @param queryParams   report filters
@@ -73,6 +85,13 @@ public class ReportService {
         } catch (InterruptedException e) {
             log.log(Level.SEVERE, String.format("%s is failed.", queryParams.get(GroovyAdapter.PARAM_REPORT_TITLE)), e);
         }
+    }
+
+    @RequestMapping(value = "job/{groovy}/{recipients}")
+    @ResponseStatus(HttpStatus.OK)
+    public void runGroovyReportJob(@PathVariable String groovy, @PathVariable String recipients, @RequestParam Map<String, String> queryParams) {
+        queryParams.put("RECIPIENTS",recipients);
+        runGroovyReportJob(groovy, queryParams);
     }
 
     @ExceptionHandler
