@@ -27,11 +27,12 @@ and deployment.
 
 groovy-email-report running on Spring Boot framework with Maven build.
 Get the code and then run mvn package. Java version 1.7.X used with Maven 3.1.X
+'mvn package' runs unit tests and return some failures, then try to start fakeSMTP and rerun 'mvn package'
 
 ## Tests
 
-Default application shall run on port 9000, you can run below line to run the tests.
+To start application, enter 'mvn spring-boot:run", default application shall run on port 9000, you can run below line to run the tests.
 
 curl http://127.0.0.1:9000/report/BrewerReport/user@helloworld.com
 
-To check email integration, fakeSMTP(https://nilhcem.github.io/FakeSMTP) is very useful.
+To check email integration, I found fakeSMTP(https://nilhcem.github.io/FakeSMTP) is very useful.

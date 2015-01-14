@@ -21,6 +21,10 @@ public class EmailIntegrationTests {
     @Autowired
     JavaMailSender javaMailSender;
 
+    /**
+     * To pass the test, you need to turn off SMTP server
+     * @throws UnknownHostException
+     */
     @Test(expected = UnknownHostException.class)
     public void emailTest() throws UnknownHostException {
         SimpleMailMessage message = new SimpleMailMessage();
