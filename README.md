@@ -36,5 +36,3 @@ To start application, enter 'mvn spring-boot:run", default application shall run
 curl http://127.0.0.1:9000/report/BrewerReport/user@helloworld.com
 
 To check email integration, I found fakeSMTP(https://nilhcem.github.io/FakeSMTP) is very useful.
-
-test again
