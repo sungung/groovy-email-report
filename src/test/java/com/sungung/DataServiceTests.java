@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -50,6 +52,14 @@ public class DataServiceTests {
         Page<Brewer> rs = brewerService.findBrewers(criteria, null);
         assertTrue(rs.hasContent());
 
+    }
+
+    @Test
+    public void brewerServiceFindAllTest() {
+        //Sort sort = new Sort(Sort.Direction.DESC, "name");
+        Sort sort = null;
+        List<Brewer> brewerList = brewerService.findAll(sort);
+        assertFalse(brewerList.isEmpty());
     }
 
     @Test
